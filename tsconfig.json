@@ -26,6 +26,25 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "src/**/*.ts", 
+    "src/**/*.tsx", 
+    "components/About.tsx",
+    "components/AdminDashboard.tsx", 
+    "components/BookingForm.tsx",
+    "components/Contact.tsx",
+    "components/ContactForm.tsx",
+    "components/Footer.tsx",
+    "components/Header.tsx",
+    "components/Hero.tsx",
+    "components/Menu.tsx",
+    "components/NewsletterSignup.tsx",
+    "components/ThankYouPage.tsx",
+    "components/figma/*.tsx",
+    "pages/**/*.ts", 
+    "pages/**/*.tsx", 
+    "App.tsx"
+  ],
+  "exclude": ["node_modules", "dist", "vite.config.ts", "server.js", "test-*.js", "components/ui/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
