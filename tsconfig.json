@@ -33,10 +33,6 @@
     "components/Contact.tsx",
     "components/ContactForm.tsx",
     "components/Footer.tsx",
-    "components/Header.tsx",
-    "components/Hero.tsx",
-    "components/Menu.tsx",
-    "components/NewsletterSignup.tsx",
     "App.tsx"
   ],
   "exclude": [
@@ -46,6 +42,10 @@
     "server.js", 
     "test-*.js", 
     "components/ui/**/*",
+    "components/Header.tsx",
+    "components/Hero.tsx",
+    "components/Menu.tsx",
+    "components/NewsletterSignup.tsx",
     "components/ThankYouPage.tsx",
     "components/figma/**/*",
     "src/**/*",
