@@ -308,6 +308,56 @@ app.put('/api/reservations/:id/status', async (req, res) => {
   }
 });
 
+// GET /api/contacts - Get all contact messages
+app.get('/api/contacts', async (req, res) => {
+  try {
+    const { db } = await connectToDatabase();
+    const collection = db.collection('contact_messages');
+    
+    const contacts = await collection
+      .find({})
+      .sort({ createdAt: -1 })
+      .toArray();
+
+    res.json({
+      success: true,
+      data: contacts,
+      total: contacts.length
+    });
+  } catch (error) {
+    console.error('❌ Error fetching contact messages:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error'
+    });
+  }
+});
+
+// GET /api/newsletter - Get all newsletter subscribers
+app.get('/api/newsletter', async (req, res) => {
+  try {
+    const { db } = await connectToDatabase();
+    const collection = db.collection('newsletter_subscribers');
+    
+    const subscribers = await collection
+      .find({})
+      .sort({ createdAt: -1 })
+      .toArray();
+
+    res.json({
+      success: true,
+      data: subscribers,
+      total: subscribers.length
+    });
+  } catch (error) {
+    console.error('❌ Error fetching newsletter subscribers:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error'
+    });
+  }
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({
