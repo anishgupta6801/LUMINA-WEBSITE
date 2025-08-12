@@ -27,8 +27,6 @@
     }
   },
   "include": [
-    "src/**/*.ts", 
-    "src/**/*.tsx", 
     "components/About.tsx",
     "components/AdminDashboard.tsx", 
     "components/BookingForm.tsx",
@@ -39,12 +37,19 @@
     "components/Hero.tsx",
     "components/Menu.tsx",
     "components/NewsletterSignup.tsx",
-    "components/ThankYouPage.tsx",
-    "components/figma/*.tsx",
-    "pages/**/*.ts", 
-    "pages/**/*.tsx", 
     "App.tsx"
   ],
-  "exclude": ["node_modules", "dist", "vite.config.ts", "server.js", "test-*.js", "components/ui/**/*"],
+  "exclude": [
+    "node_modules", 
+    "dist", 
+    "vite.config.ts", 
+    "server.js", 
+    "test-*.js", 
+    "components/ui/**/*",
+    "components/ThankYouPage.tsx",
+    "components/figma/**/*",
+    "src/**/*",
+    "pages/**/*"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
