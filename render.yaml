@@ -1,0 +1,37 @@
+services:
+  # Main web service
+  - type: web
+    name: lumina-restaurant
+    runtime: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false  # This should be set in Render dashboard for security
+      - key: MONGODB_DB_NAME
+        value: restaurant
+    autoDeploy: true
+    branch: main
+    rootDir: .
+    
+    # Health check configuration
+    healthCheckPath: /api/health
+    
+    # Disk storage (if needed for logs)
+    disk:
+      name: lumina-disk
+      mountPath: /tmp
+      sizeGB: 1
+
+# Optional: Static site service (if you want to serve assets separately)
+# - type: static
+#   name: lumina-assets
+#   buildCommand: npm install && npm run build
+#   staticPublishPath: ./dist
+#   pullRequestPreviewsEnabled: true
+#   branch: main

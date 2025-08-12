@@ -321,16 +321,19 @@ app.get('/api/health', (req, res) => {
 
 // Production: Serve static files from dist directory
 if (NODE_ENV === 'production') {
-  // Serve static files from the dist directory
-  app.use(express.static(path.join(__dirname, 'dist')));
+  // Trust proxy for deployment platforms like Render, Heroku, etc.
+  app.set('trust proxy', 1);
+  
+  // Serve static files from the dist directory with proper caching
+  app.use(express.static(path.join(__dirname, 'dist'), {
+    maxAge: '1d', // Cache static assets for 1 day
+    etag: true,
+    lastModified: true
+  }));
   
   // Handle client-side routing - serve index.html for all non-API routes
+  // This catch-all handler must come AFTER all API routes
   app.get('*', (req, res) => {
-    // Don't serve index.html for API routes
-    if (req.path.startsWith('/api')) {
-      return res.status(404).json({ error: 'API endpoint not found' });
-    }
-    
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
 } else {
@@ -339,7 +342,16 @@ if (NODE_ENV === 'production') {
     res.json({
       message: 'Lumina Restaurant API - Development Mode',
       frontend: 'Run `npm run dev` to start the frontend development server',
-      api: `API server running on http://localhost:${PORT}`
+      api: `API server running on http://localhost:${PORT}`,
+      availableEndpoints: [
+        'GET /api/health',
+        'POST /api/reservations',
+        'GET /api/reservations',
+        'PUT /api/reservations/:id/status',
+        'POST /api/contact',
+        'GET /api/contact',
+        'POST /api/newsletter'
+      ]
     });
   });
 }
